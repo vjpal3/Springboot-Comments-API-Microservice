@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -49,9 +51,13 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	public List<Comment> list(String pageId) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByPageId(pageId);
 	} 
+	
+	@Override
+	public Page<Comment> list(String pageId, Pageable pageable) throws IOException {
+		return repository.findByPageId(pageId, pageable);
+	}
 
 	@Override
 	public Comment get(String id) {
@@ -60,13 +66,15 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	public List<Comment> listSpamComments(String pageId) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByPageIdAndSpamIsTrue(pageId);
 	}
 
 	@Override
 	public void delete(String id) {
-		// TODO Auto-generated method stub
-		
+		repository.deleteById(id);
 	}
+
+	
+	
+	
 }
