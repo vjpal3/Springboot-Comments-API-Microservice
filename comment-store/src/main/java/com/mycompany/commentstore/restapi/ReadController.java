@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +38,7 @@ public class ReadController {
 	
 	@RequestMapping(value = "/comments/{id}/paging")
 	public Page<Comment> getCommentsPaging(
-			@PathVariable(vaue = "id") String pageId, 
+			@PathVariable(value = "id") String pageId, 
 			Pageable pageable
 	) throws IOException {
 		return service.list(pageId, pageable);
