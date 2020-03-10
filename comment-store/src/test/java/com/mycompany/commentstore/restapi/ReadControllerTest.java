@@ -63,6 +63,11 @@ public class ReadControllerTest {
 		verify(this.commentService, times(1)).list(anyString());
 	}
 	
+	@Test
+	public void testGetCommentsNotFound() throws Exception {
+		this.mvc.perform(get("/comments/2")).andExpect(status().is(404));
+	}
+	
 	private Comment setupDummyModel() {
     	Comment model = new Comment();
 		model.setUsernme("testuser");
