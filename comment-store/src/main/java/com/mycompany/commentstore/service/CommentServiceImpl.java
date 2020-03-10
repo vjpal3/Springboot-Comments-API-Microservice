@@ -55,11 +55,6 @@ public class CommentServiceImpl implements CommentService{
 	} 
 	
 	@Override
-	public Page<Comment> list(String pageId, Pageable pageable) throws IOException {
-		return repository.findByPageId(pageId, pageable);
-	}
-
-	@Override
 	public Comment get(String id) {
 		return repository.findById(id).orElse(null);
 	}
@@ -74,7 +69,8 @@ public class CommentServiceImpl implements CommentService{
 		repository.deleteById(id);
 	}
 
-	
-	
-	
+	@Override
+	public Page<Comment> list(String pageId, Pageable pageable) throws IOException {
+		return repository.findByPageId(pageId, pageable);
+	}
 }

@@ -34,6 +34,13 @@ public class ReadController {
 		return r;
 	}
 	
+	@RequestMapping(value = "/comments/{id}/paging")
+	public Page<Comment> getCommentsPaging(
+			@PathVariable(vaue = "id") String pageId, 
+			Pageable pageable
+	) throws IOException {
+		return service.list(pageId, pageable);
+	}
 	
 	
 }
