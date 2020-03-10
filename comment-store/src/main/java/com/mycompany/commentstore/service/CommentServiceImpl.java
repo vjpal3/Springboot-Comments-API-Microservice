@@ -44,7 +44,7 @@ public class CommentServiceImpl implements CommentService{
 		else {
 			model.setCreationDate(Instant.now());
 			model.setLastModificationDate(Instant.now());
-			repository.save(dbModel);
+			repository.save(model);
 		}
 		return model.getId();
 	}
