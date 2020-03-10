@@ -3,6 +3,8 @@ package com.mycompany.commentstore.restapi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -68,5 +70,14 @@ public class WriteControllerTest {
 		model.setComment("I am the comment");
 		return model;
     }
+	
+	@Test
+	public void testDelete() throws Exception {
+		Comment model = setupDummyModel();
+		String id = service.put(model);
+		
+		this.mvc.perform(delete("/comment/" + id)).andExpect(status().isOk());
+		assertNull(service.get(model.getId()));
+	}
 
 }
