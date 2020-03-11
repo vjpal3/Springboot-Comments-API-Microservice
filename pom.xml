@@ -19,5 +19,6 @@
   
   <modules>
   	<module>comment-store</module>
+  	<module>logging</module>
   </modules>
 </project>
