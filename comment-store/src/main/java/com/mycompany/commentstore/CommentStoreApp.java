@@ -1,13 +1,19 @@
 package com.mycompany.commentstore;
 
 import org.springframework.boot.SpringApplication;
+
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.Filter;
+
+import com.mycompany.logging.RequestContextLoggingFilter;
 
 @SpringBootApplication
 @RestController
@@ -31,5 +37,10 @@ public class CommentStoreApp {
 	@RequestMapping("/")
 	String home() {
 		return "Hello World!";
+	}
+	
+	@Bean
+	public Filter initRequestContextLoggingFilter() {
+	return new RequestContextLoggingFilter();
 	}
 }
